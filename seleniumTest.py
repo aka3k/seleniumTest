@@ -37,12 +37,20 @@ try:
     # Aspetta che i risultati della ricerca vengano caricati
     time.sleep(2)
 
-    # Clicca su "Immagini" per aprire Google Immagini
-    images_link = driver.find_element(By.LINK_TEXT, 'Immagini')
-    images_link.click()
+    # Clicca sul primo risultato della ricerca
+    first_result = driver.find_element(By.XPATH, '(//h3)[1]/../..')
+    first_result.click()
 
-    # Aspetta che le immagini vengano caricate
-    time.sleep(2)
+    # Aspetta qualche secondo per permettere il caricamento della pagina
+    time.sleep(3)
+
+    # Estrai il titolo della pagina
+    page_title = driver.title
+    print(f"Il titolo della pagina è: {page_title}")
+
+    # Estrarre un paragrafo dalla pagina
+    paragraph = driver.find_element(By.XPATH, '//p')
+    print(f"Il primo paragrafo della pagina è: {paragraph.text}")
 
 finally:
     # Chiudi il browser
